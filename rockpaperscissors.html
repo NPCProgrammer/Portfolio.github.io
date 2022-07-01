@@ -1,0 +1,441 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>SortTimer</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Portfolio</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Project page</a></li>
+							<li><a href="generic.html">Experience Page</a></li>
+							<li><a href="skills.html">Skills page</a></li>
+							
+                            <li class = "active"><a href="rockpaperscissors.html">Sort Timer</a></li>
+							<!--	<li><a href="elements.html">Elements Reference</a></li> -->
+						</ul>
+						
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<h1>Sort Timer</h1>
+									<p>This program times how long each sort takes, it isn't super advanced,<br />
+                                        but does have some advanced aspects in it.
+                                    </p>
+								</header>
+								<div class="image main"><img src="images/timer.jpg" alt="" /></div>
+								<p>This is a program that takes the time it takes for each sort method to finish for each array, and then prints the time it took, and showcases knowledge on sorting algorithms. See result below </p>
+                                <div class="image main"><img src="images/SortTimer.jpg" alt="" /></div>
+                                <pre><code>
+                                    
+
+                                    //Kearnan Bishop on Sunday, May 22nd, 2022
+package stuf;
+
+
+import java.util.Arrays;
+import java.util.Random;
+
+public class SortTimer {
+
+	// Please expand method main() to meet the lab requirements.
+	
+	// You have the following sorting methods available:
+	// insertionSort(int[] a);
+	// selectionSort(int[] a);
+	// mergeSort(int[] a);
+	// quickSort(int[] a);
+	// The array will be in sorted order after the routines are called!
+	// Be sure to re-randomize the array after each sort.
+	
+	public static void main(String[] args) {
+		// Create and initialize arrays
+		long quickSortDuration = 0;
+		long mergeSortDuration = 0;
+		long inSortDuration = 0;
+		long selSortDuration = 0;
+		int[] a = new int[50];
+		int[] b = new int[5000];
+		int[] c = new int[50000];
+		int[] d = new int[500000];
+		int[] e = new int[1000000];
+		
+		
+		// credit to https://www.tutorialspoint.com/generate-a-random-array-of-integers-in-java#:~:text=In%20order%20to%20generate%20random,this%20random%20number%20generator%20sequence.
+		Random rd = new Random();
+		for (int i = 0; i < a.length; i++) {
+	         a[i] = rd.nextInt(101);
+		}
+		rd = new Random();
+		for (int i = 0; i < b.length; i++) {
+	         b[i] = rd.nextInt(101);
+		}
+		rd = new Random();
+		for (int i = 0; i < c.length; i++) {
+	         c[i] = rd.nextInt(101);
+		}
+		rd = new Random();
+		for (int i = 0; i < d.length; i++) {
+	         d[i] = rd.nextInt(101);
+		}
+		rd = new Random();
+		for (int i = 0; i < e.length; i++) {
+	         e[i] = rd.nextInt(101);
+		}
+		// Check the time to sort array a
+		long startTime = System.nanoTime();
+		quickSort(a);
+		long endTime = System.nanoTime();
+		long duration = (endTime - startTime) / 1000l;
+		quickSortDuration = duration;
+		System.out.println("Working on an array of length " + a.length + ".");
+		System.out.println("Quick sort: " + duration);	
+		
+		startTime = System.nanoTime();
+		mergeSort(a);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		System.out.println("Merge sort: " + duration);	
+		
+		startTime = System.nanoTime();
+		insertionSort(a);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		System.out.println("Insertion sort: " + duration);	
+		
+		startTime = System.nanoTime();
+		selectionSort(a);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		System.out.println("Selection sort: " + duration);	
+		System.out.println();
+		
+		//  b
+		
+		startTime = System.nanoTime();
+		quickSort(b);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		quickSortDuration = duration;
+		System.out.println("Working on an array of length " + b.length + ".");
+		System.out.println("Quick sort: " + duration);	
+		
+		startTime = System.nanoTime();
+		mergeSort(b);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		System.out.println("Merge sort: " + duration);	
+		
+		startTime = System.nanoTime();
+		insertionSort(b);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		System.out.println("Insertion sort: " + duration);	
+		
+		startTime = System.nanoTime();
+		selectionSort(b);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		System.out.println("Selection sort: " + duration);	
+		System.out.println();
+		
+		// c
+		
+		startTime = System.nanoTime();
+		quickSort(c);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		quickSortDuration = duration;
+		System.out.println("Working on an array of length " + c.length + ".");
+		System.out.println("Quick sort: " + duration);	
+		
+		startTime = System.nanoTime();
+		mergeSort(c);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		System.out.println("Merge sort: " + duration);	
+		
+		startTime = System.nanoTime();
+		insertionSort(c);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		System.out.println("Insertion sort: " + duration);	
+		
+		startTime = System.nanoTime();
+		selectionSort(c);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		System.out.println("Selection sort: " + duration);	
+		System.out.println();
+		
+		// d
+		
+		startTime = System.nanoTime();
+		quickSort(d);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		quickSortDuration = duration;
+		System.out.println("Working on an array of length " + d.length + ".");
+		System.out.println("Quick sort: " + duration);	
+		
+		startTime = System.nanoTime();
+		mergeSort(d);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		System.out.println("Merge sort: " + duration);	
+		
+		startTime = System.nanoTime();
+		insertionSort(d);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		System.out.println("Insertion sort: " + duration);	
+		
+		startTime = System.nanoTime();
+		selectionSort(d);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		System.out.println("Selection sort: " + duration);	
+		System.out.println();
+		
+		// e
+		
+		startTime = System.nanoTime();
+		quickSort(e);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		quickSortDuration = duration;
+		System.out.println("Working on an array of length " + e.length + ".");
+		System.out.println("Quick sort: " + duration);	
+		
+		startTime = System.nanoTime();
+		mergeSort(e);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		System.out.println("Merge sort: " + duration);	
+		
+		startTime = System.nanoTime();
+		insertionSort(e);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		System.out.println("Insertion sort: " + duration);	
+		
+		startTime = System.nanoTime();
+		selectionSort(e);
+		endTime = System.nanoTime();
+		duration = (endTime - startTime) / 1000l;
+		System.out.println("Selection sort: " + duration);	
+		System.out.println();
+		
+	}
+
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	//
+	// ###############################################################
+	//
+
+
+	
+	// Thanks to https://www.javatpoint.com/insertion-sort-in-java
+	public static void insertionSort(int array[]) {
+		int n = array.length;
+		for (int j = 1; j < n; j++) {
+			int key = array[j];
+			int i = j - 1;
+			while ((i > -1) && (array[i] > key)) {
+				array[i + 1] = array[i];
+				i--;
+			}
+			array[i + 1] = key;
+		}
+	}
+
+	// Thanks to
+	// http://www.java2novice.com/java-sorting-algorithms/selection-sort/
+	public static void selectionSort(int[] arr) {
+		for (int i = 0; i < arr.length - 1; i++) {
+			int index = i;
+			for (int j = i + 1; j < arr.length; j++)
+				if (arr[j] < arr[index])
+					index = j;
+
+			int smallerNumber = arr[index];
+			arr[index] = arr[i];
+			arr[i] = smallerNumber;
+		}
+	}
+
+	// Thanks to http://stackoverflow.com/questions/13727030/mergesort-in-java
+	public static void mergeSort(int[] A) {
+		if (A.length > 1) {
+			int q = A.length / 2;
+
+			// changed range of leftArray from 0-to-q to 0-to-(q-1)
+			int[] leftArray = Arrays.copyOfRange(A, 0, q - 1);
+			// changed range of rightArray from q-to-A.length to
+			// q-to-(A.length-1)
+			int[] rightArray = Arrays.copyOfRange(A, q, A.length - 1);
+
+			mergeSort(leftArray);
+			mergeSort(rightArray);
+
+			merge(A, leftArray, rightArray);
+		}
+	}
+
+	private static void merge(int[] a, int[] l, int[] r) {
+		int totElem = l.length + r.length;
+		// int[] a = new int[totElem];
+		int i, li, ri;
+		i = li = ri = 0;
+		while (i < totElem) {
+			if ((li < l.length) && (ri < r.length)) {
+				if (l[li] < r[ri]) {
+					a[i] = l[li];
+					i++;
+					li++;
+				} else {
+					a[i] = r[ri];
+					i++;
+					ri++;
+				}
+			} else {
+				if (li >= l.length) {
+					while (ri < r.length) {
+						a[i] = r[ri];
+						i++;
+						ri++;
+					}
+				}
+				if (ri >= r.length) {
+					while (li < l.length) {
+						a[i] = l[li];
+						li++;
+						i++;
+					}
+				}
+			}
+		}
+		// return a;
+	}
+
+	// Thanks to: http://www.algolist.net/Algorithms/Sorting/Quicksort
+	public static void quickSort(int arr[]) {
+		quickSortRecurse(arr, 0, arr.length-1);
+	}
+	
+	private static void quickSortRecurse(int arr[], int left, int right) {
+		int index = partition(arr, left, right);
+		if (left < index - 1)
+			quickSortRecurse(arr, left, index - 1);
+		if (index < right)
+			quickSortRecurse(arr, index, right);
+	}
+
+	private static int partition(int arr[], int left, int right) {
+		int i = left, j = right;
+		int tmp;
+		int pivot = arr[(left + right) / 2];
+
+		while (i <= j) {
+			while (arr[i] < pivot)
+				i++;
+			while (arr[j] > pivot)
+				j--;
+			if (i <= j) {
+				tmp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = tmp;
+				i++;
+				j--;
+			}
+		}
+		;
+
+		return i;
+	}
+
+}
+
+
+
+
+
+                                </code>
+                                </pre>
+
+                                </section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						
+						<section class="split contact">
+							<section class="alt">
+								<h3>Address</h3>
+								<p> 								<p> 1399 S Bank Rd, Oakville, WA 98568<br />
+									<br />
+								</p>
+							</section>
+							<section>
+								<h3>Phone</h3>
+								<p>(360) 529-2875</p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p>kbishop3@spscc.edu</p>
+							</section>
+							
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+                <div id="copyright">
+                    <ul><li>Template: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+                </div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

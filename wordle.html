@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Wordle</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Portfolio</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Project page</a></li>
+							<li><a href="generic.html">Experience Page</a></li>
+							<li><a href="skills.html">Skills page</a></li>
+							
+                            <li class = "active"><a href="wordle.html">Wordle</a></li>
+							<!--	<li><a href="elements.html">Elements Reference</a></li> -->
+						</ul>
+						
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+
+									<h1>Wordle</h1>
+									<p>This project is about the game wordle.<br />
+                                        This is a somewhat advanced game, and was made quite some time ago.
+                                    </p>
+								</header>
+								<div class="image main"><img src="images/worldle.jpg" alt="" /></div>
+								<p>Wordle is a game where you get 5 guesses to guess a word, if you get a letter in the right place, it will appear green, if you get it in the wrong place it will appear yellow, and if it isnt in the word it will turn gray. This program implements some advanced topics like GUI, however is not optimized. I don't see the need to optimize it, because it is plenty fast in its task. See results below</p>
+                                <div class="image main"><img src="images/wordletwo.jpg" alt="" /></div>
+                                <pre><code>
+// Made by Kearnan Bishop on Friday, March 11th, 2022.
+package stuf;
+import java.io.*;
+import java.util.Scanner;
+public class Wordle {
+	static String word = "";
+	static CharSequence c;
+	static int repeater = 0;
+	static String inputWord = "";
+	public static void main(String[] args) throws IOException {
+		// Create random number 0 - 99
+		double randNumber = Math.random();
+		double d = randNumber * 100;
+		// Type cast double to int
+		int randomInt = (int) d;
+
+		BufferedReader reader = new BufferedReader(new FileReader("words"));
+		String line;
+		int lineindex = 0;
+		while ((line = reader.readLine()) != null) {
+			if (lineindex == randomInt) {
+				word = line;
+			}
+			lineindex++;
+		}
+		reader.close();
+		System.out.println("? means you havent discovered the letter, # means the letter is in the word.");
+		
+		inputWords();
+		
+	}
+
+	static void inputWords() {
+		Scanner scan = new Scanner(System.in);
+		int i = 0;
+		while (repeater == 0) {
+		System.out.println("Enter word: ");
+		inputWord = scan.nextLine();
+		if (inputWord.equals(word)) {
+			repeater = 1;
+			System.out.println("Correct, the word was " + word);
+		}
+		if (!inputWord.equals(word)) {
+			System.out.println("Wrong");
+			correctLetters();
+		}
+		if (i>3) {
+			repeater = 1;
+			System.out.println("the correct word was: " + word);
+		}
+		i++;
+		}
+		scan.close();
+	}
+	static void correctLetters() {
+		char[] letters = new char[5];
+		//char word1 = word;
+		char[] word1 = new char[5];
+		char[] newWord = new char[5];
+		for (int i = 0; i < 5; i++) {
+			letters[i] = inputWord.charAt(i);
+		}
+		for (int i = 0; i < 5; i++) {
+			word1[i] = word.charAt(i);
+		}
+		for (int i = 0; i < 5; i++) {
+			if (letters[i] == word1[i]) {
+				newWord[i] = word1[i];
+			}
+			if (letters[i] != word1[i]) {
+				newWord[i] = '?';
+					String s = Character.toString(letters[i]);
+				
+					if (word.contains(s)) {
+						int place = word.indexOf(s);
+						newWord[place] = '#';
+						//System.out.println("letters in the wrong place: " + s);
+				}
+
+			}
+		}
+		String str = String.valueOf(newWord);
+		System.out.println(str);
+		//if ()
+	}
+}
+
+
+
+
+                                </code></pre>
+                                </section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						
+						<section class="split contact">
+							<section class="alt">
+								<h3>Address</h3>
+								<p> 1399 S Bank Rd, Oakville, WA 98568<br />
+								</p>
+							</section>
+							<section>
+								<h3>Phone</h3>
+								<p>(360) 529-2875</p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p>kbishop3@spscc.edu</p>
+							</section>
+							
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+                <div id="copyright">
+                    <ul><li>Template: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+                </div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
